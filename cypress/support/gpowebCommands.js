@@ -7,5 +7,3 @@ Cypress.Commands.add('login', (nome, senha) => {
         cy.contains('button', 'CONTINUAR').click();
         cy.url().should('contain', 'https://avaliacaodigital.cesgranrio.org.br/#/');
 })
-
-//login co

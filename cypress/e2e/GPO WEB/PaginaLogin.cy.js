@@ -5,8 +5,8 @@ describe('GPO WEB', () => {
     beforeEach(() => {
         cy.visit('https://avaliacaodigital.cesgranrio.org.br/');
     })
-
-    it('Autenticação sucesso', () => {
+    //#########pra começar o teste completo, remove esse only!##########
+    it.only('Autenticação sucesso', () => {
         cy.login('15275162707', 'Miguel2504'); 
         
     })
@@ -34,11 +34,10 @@ describe('GPO WEB', () => {
         cy.get('input[type="password"]').type('senha errada');
         for (let i = 0; i < 10; i++) {
         cy.get('.form-signin > .btn').click();
-        cy.wait(5000);
+        cy.wait(3000);
         cy.contains('div', 'Usuário ou senha inválido. Por favor, verifique suas informações e tente novamente.').should('be.visible');
         }
     });
-    //ao finalizar este teste deverá ser desbloqueado o usuário para reutiliza-lo.
     it('usuário bloqueado', () => {
         cy.contains('button', 'ENTRAR').click();
         cy.get('input[type="text"]').type('15275162707');
