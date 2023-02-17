@@ -160,6 +160,6 @@
   "author": "Israel Domiciano",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.2.0"
+    "cypress": "^12.6.0"
   }
 }
