@@ -35,7 +35,7 @@ function gerarSenhaFixa() {
 }
 
 // Definir o número de linhas que deseja gerar
-const numeroDeLinhas = 1000; // Altere para o número desejado
+const numeroDeLinhas = 30; // Altere para o número desejado
 
 // Verificar se o arquivo já existe
 const arquivoCSV = numeroDeLinhas + ' LinhasGeradas.csv';
