@@ -1,5 +1,14 @@
 describe('testando api', () => {
-    it('api/PortalEventos', () => {
+
+    it('/api/check', () => {
+        cy.request({
+            method: 'GET',
+            url: "https://homologacaodigital.cesgranrio.com.br/api/check"
+        }).then((res) => {
+            expect(res.status).to.be.equal(200)
+        })
+    })
+    it('/api/PortalEventos', () => {
         cy.request({
             method: 'GET',
             url: "https://homologacaodigital.cesgranrio.com.br/api/PortalEventos"
@@ -7,7 +16,7 @@ describe('testando api', () => {
             expect(res.status).to.be.equal(200)
         })
     })
-    it('api/contatos/', () => {
+    it('/api/contatos/', () => {
         cy.request({
             method: 'GET',
             url: "https://homologacaodigital.cesgranrio.com.br/api/contatos/"
@@ -15,7 +24,7 @@ describe('testando api', () => {
             expect(res.status).to.be.equal(200)
         })
     })
-    it('login/authentication (Login e senha inválido)', () => {
+    it('/api/login/authenticati (Login e senha inválido)', () => {
         cy.request({
             method: 'POST',
             url: 'https://homologacaodigital.cesgranrio.com.br/api/login/authentication',
@@ -31,7 +40,7 @@ describe('testando api', () => {
             expect(response.body.success).to.be.false
         })
     })
-    it('login/authentication (Login certo e senha inválido)', () => {
+    it('/api/login/authenticati (Login certo e senha inválido)', () => {
         cy.request({
             method: 'POST',
             url: 'https://homologacaodigital.cesgranrio.com.br/api/login/authentication',
@@ -47,7 +56,7 @@ describe('testando api', () => {
             expect(response.body.success).to.be.false
         })
     })
-    it('login/authentication (Login certo e senha Certo)', () => {
+    it.only('/api/login/authenticati (Login certo e senha Certo)', () => {
         cy.request({
             method: 'POST',
             url: 'https://homologacaodigital.cesgranrio.com.br/api/login/authentication',
@@ -60,6 +69,21 @@ describe('testando api', () => {
             expect(response.status).to.eq(200)
             expect(response.body.success).to.be.true
             expect(response.body.data.accessToken).to.exist
+
+            cy.wrap(response.body.data.accessToken).as('accessToken')
         })
     })
-})
+
+    it.only('/api/check', () => {
+        cy.request({
+            method: 'GET',
+            url: "https://homologacaodigital.cesgranrio.com.br/api/usuarios/current",
+            headers: {
+                Authorization: `Bearer ${Cypress.env('accessToken')}`
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200)
+            // Fazer asserções adicionais
+        })
+    })
+})      
